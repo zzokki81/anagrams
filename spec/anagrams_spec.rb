@@ -2,9 +2,10 @@ require 'anagrams'
 
 describe Anagrams do
   describe '.group_anagrams' do
-    it "returns all anagrams from a file" do
+    it "Returns anagrams from a file: " do
       anagram = Anagrams.new("AnagramFile.txt")
-      expect(anagram.group_anagrams).to eql([["spate", "tapes", "pates", "septa", "peats", "tepas", "paste"], ["cuprites", "pictures", "crepitus", "piecrust"], ["undress", "sunders"]])
+      expected_anagrams = [%w[spate tapes pates septa peats tepas paste], %w[cuprites pictures crepitus piecrust], %w[undress sunders]]
+      expect(anagram.show_anagrams).to eql expected_anagrams
     end
   end
 end
