@@ -1,13 +1,14 @@
-require_relative 'lib/anagrams'
+require_relative('lib/anagrams.rb')
 
-input_word = ARGV[0]
-text_file = ARGV[1]
+text_file, *input_word = ARGV
 
-anagram = Anagrams.new(text_file)
-anagram_result = anagram.find_anagram(input_word)
-if anagram_result == []
-  puts "No anagrams found for word '#{input_word}'"
-else
-  puts "Anagrams for given word '#{input_word}' is: "
-  puts anagram_result * ' '
+input_word.each do |word|
+  anagram = SearchAnagrams.new(word)
+  anagram_result = anagram.find_anagram('AnagramFile.txt')
+  if anagram_result == []
+    puts("No anagrams found for word '#{word}'")
+  else
+    puts("Anagrams for given words '#{word}' is: ")
+    puts((anagram_result * ' '))
+  end
 end
