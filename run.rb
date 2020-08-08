@@ -1,6 +1,6 @@
 require_relative 'lib/anagrams'
 
-text_file = ARGV[0]
-anagram = Anagrams.new(text_file)
+dictionary = ARGV[0]
+anagram = Anagrams.new(dictionary)
 puts 'Collected anagrams is: '
-anagram.to_string
+anagram.to_s

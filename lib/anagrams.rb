@@ -1,12 +1,12 @@
 class Anagrams
-  def initialize(anagram_file)
-    @anagram_file = anagram_file
+  def initialize(dictionary)
+    @dictionary = dictionary
   end
 
   def group_anagrams
     anagram_group = {}
     read_file.group_by do |word|
-      sorted_word = word.chars.sort.join
+      sorted_word = sort_and_validate(word)
       anagram_group[sorted_word] ||= []
       (anagram_group[sorted_word] << word)
     end
@@ -15,24 +15,30 @@ class Anagrams
 
   def find_anagram(input_word)
     result = []
-    word_characters = input_word.chars.to_a.sort.join
+    word_characters = sort_and_validate(input_word)
     read_file.each do |word|
-      result.push(word) if word.chars.to_a.sort.join == word_characters
+      result.push(word) if sort_and_validate(word) == word_characters
     end
     result
   end
 
-  def to_string
+  def to_s
     group_anagrams.each do |anagram_block|
-      puts anagram_block.join(' ') if anagram_block.size > 1
+      puts(anagram_block.join(' ')) if anagram_block.size > 1
     end.to_s
   end
 
+  private
+
   def read_file
-    if @anagram_file.kind_of?(Array)
-      @anagram_file
+    if @dictionary.kind_of?(Array)
+      @dictionary
     else
-      File.read(@anagram_file).encode('UTF-8', invalid: :replace, replace: '').split("\n")
+      File.read(@dictionary).encode('UTF-8', invalid: :replace, replace: '').split("\n")
     end
+  end
+
+  def sort_and_validate(word)
+    word.downcase.split('').sort.join.gsub(/\W+/, '').strip
   end
 end
