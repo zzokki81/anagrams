@@ -1,6 +1,6 @@
 require_relative 'lib/anagrams'
 
 dictionary = ARGV[0]
-anagram = Anagrams.new(dictionary)
+anagrams = Anagrams.new(dictionary)
 puts 'Collected anagrams is: '
-anagram.to_s
+puts anagrams.to_s
