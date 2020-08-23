@@ -13,6 +13,6 @@ begin
       puts anagram_result
     end
   end
-rescue
-  puts "File '#{dictionary_filename}' does not exists"
+rescue Errno::ENOENT => e
+  puts e.message
 end

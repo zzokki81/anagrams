@@ -29,7 +29,7 @@ class Anagrams
       @dictionary
     else
       @dictionary = File.read(@dictionary).encode('UTF-8', invalid: :replace, replace: '').split("\n")
-    end rescue nil
+    end
   end
 
   def word_hash(word_key)
